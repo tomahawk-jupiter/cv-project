@@ -1,0 +1,34 @@
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: solid 1px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: solid 1px;
+}
+
+.edu-container {
+  width: 300px;
+  border: solid 1px;
+}
+
+.job-container {
+  width: 300px;
+  border: solid 1px;
+}
+
+.card {
+  border: solid 1px;
+  margin: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
