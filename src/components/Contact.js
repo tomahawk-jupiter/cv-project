@@ -1,75 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Contact extends Component {
-  constructor(props) {
-    super(props);
+const Contact = () => {
 
-    this.state = {
-      btnLabel: 'Edit',
-      name: 'Name',
-      email: 'email@email',
-      phone: '1234567'
-    };
+  const [btnLabel, setBtnLabel] = useState('Edit');
+  const [fields, setFields] = useState({
+    name: 'Bob',
+    email: 'bob@email',
+    phone: '1234567'
+  });
 
-    this.editContact = this.editContact.bind(this);
-  }
-
-  editContact = () => {
-    if (this.state.btnLabel === 'Edit') {
-      this.setState({
-        btnLabel: 'Submit'
-      });
+  const editContact = () => {
+    if (btnLabel === 'Edit') {
+      setBtnLabel('Submit');
     } else {
-      this.setState({
-        btnLabel: 'Edit'
-      });
+      setBtnLabel('Edit');
     }
   }
 
-  changeText = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
+  const changeText = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    
+    setFields({
+      [field]: value
     });
   }
 
-  render() {
-    const { name, email, phone } = this.state;
-
-   { if (this.state.btnLabel === 'Edit') {
-      return(
-        <div className="contact-container">
-          <button onClick={this.editContact}>{this.state.btnLabel}</button>
-          <div>{name}</div>
-          <div>{email}</div>
-          <div>{phone}</div>
-        </div>
-      );
-    }
+  if (btnLabel === 'Edit') {
     return(
       <div className="contact-container">
-        <button onClick={this.editContact}>{this.state.btnLabel}</button>
-        <input 
-          name="name" 
-          type="text" 
-          defaultValue={name} 
-          onChange={this.changeText}
-        ></input>
-        <input 
-          name="email" 
-          type="text" 
-          defaultValue={email} 
-          onChange={this.changeText}
-        ></input>
-        <input 
-          name="phone" 
-          type="text" 
-          defaultValue={phone} 
-          onChange={this.changeText}
-        ></input>
+        <button onClick={editContact}>{btnLabel}</button>
+        <div>{fields.name}</div>
+        <div>{fields.email}</div>
+        <div>{fields.phone}</div>
       </div>
-    )}
-
+    );
   }
-}
+  return(
+    <div className="contact-container">
+      <button onClick={editContact}>{btnLabel}</button>
+      <input 
+        name="name" 
+        type="text" 
+        defaultValue={fields.name} 
+        onChange={changeText}
+      ></input>
+      <input 
+        name="email" 
+        type="text" 
+        defaultValue={fields.email} 
+        onChange={changeText}
+      ></input>
+      <input 
+        name="phone" 
+        type="text" 
+        defaultValue={fields.phone} 
+        onChange={changeText}
+      ></input>
+    </div>
+  );
+};
 
 export default Contact;

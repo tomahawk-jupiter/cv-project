@@ -1,91 +1,79 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import EduCards from './EduCards';
 import uniqid from 'uniqid';
 
-class Education extends Component {
-  constructor(props) {
-    super(props);
+const Education = (props) => {
+  const [btnText, setBtnText] = useState('Add');
+  const [fields, setFields] = useState({
+    school: '',
+    title: '',
+    started: '',
+    finished: ''
+  });
+  const [eduArray, setEduArray] = useState([]);
 
-    this.state = {
-      btnText: 'Add',
-      school: '',
-      title: '',
-      started: '',
-      finished: '',
-      eduArray: []
-    }
-
-    this.deleteCard = this.deleteCard.bind(this);
-  }
-
-  addEdu = () => {
-    if (this.state.btnText === 'Submit') {
+  const addEdu = () => {
+    if (btnText === 'Submit') {
       const card = {
         id: uniqid(),
-        school: this.state.school,
-        title: this.state.title,
-        started: this.state.started,
-        finished: this.state.finished
+        school: fields.school,
+        title: fields.title,
+        started: fields.started,
+        finished: fields.finished
       }
 
-      this.setState({
-        btnText: 'Add',
+      setBtnText('Add');
+      setFields({
         school: '',
         title: '',
         started: '',
-        finished: '',
-        eduArray: this.state.eduArray.concat(card)
+        finished: ''
       });
+      setEduArray(eduArray.concat(card));
 
     } else {
-      this.setState({
-        btnText: 'Submit'
-      })
+      setBtnText('Submit');
     }
   }
 
-  changeText = (e) => {
-    this.setState({
+  const changeText = (e) => {
+    setFields({
       [e.target.name]: e.target.value
     })
   }
 
-  deleteCard = (e) => {
-    this.setState({
-      eduArray: this.state.eduArray.filter(card => card.id !== e.target.parentElement.id)
-    });
+  const deleteCard = (e) => {
+    setEduArray(eduArray.filter(card => card.id !== e.target.parentElement.id));
   }
 
-  handleView = () => {
-    if (this.state.btnText === 'Submit') {
+  const handleView = () => {
+    if (btnText === 'Submit') {
       return(
         <form className="edu-form">
           <label>School Name</label>
-          <input name="school" onChange={this.changeText}></input>
+          <input name="school" onChange={changeText}></input>
           <label>Title of Study</label>
-          <input name="title" onChange={this.changeText}></input>
+          <input name="title" onChange={changeText}></input>
           <label>Started</label>
-          <input name="started" onChange={this.changeText}></input>
+          <input name="started" onChange={changeText}></input>
           <label>Finished</label>
-          <input name="finished" onChange={this.changeText}></input>
+          <input name="finished" onChange={changeText}></input>
         </form>
       );
     } 
-    if (this.state.eduArray.length > 0) {
+    if (eduArray.length > 0) {
       return(
-        <EduCards deleteCard={this.deleteCard} cards={this.state.eduArray} />
+        <EduCards deleteCard={deleteCard} cards={eduArray} />
       );
     }
   }
 
-  render() {
-    return(
-      <div className="edu-container">
-        <button onClick={this.addEdu}>{this.state.btnText}</button>
-        {this.handleView()}
-      </div>
-    );
-  };
+  return(
+    <div className="edu-container">
+      <button onClick={addEdu}>{btnText}</button>
+      {handleView()}
+    </div>
+  );
 }
 
 export default Education;

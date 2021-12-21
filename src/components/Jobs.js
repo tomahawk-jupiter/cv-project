@@ -1,93 +1,81 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import JobCards from './JobCards';
 import uniqid from 'uniqid';
 
-class Jobs extends Component {
-  constructor() {
-    super();
+const Jobs = () => {
+  const [btnText, setBtnText] = useState('Add');
+  const [fields, setFields] = useState({
+    company: '',
+    title: '',
+    tasks: '',
+    started: '',
+    finished: ''
+  });
+  const [jobArray, setJobArray] = useState([]);
 
-    this.state = {
-      btnText: 'Add',
-      company: '',
-      title: '',
-      tasks: '',
-      started: '',
-      finished: '',
-      jobArray: []
-    }
-
-    this.deleteCard = this.deleteCard.bind(this);
+  const deleteCard = (e) => {
+    setJobArray(jobArray.filter(card => card.id !== e.target.parentElement.id));
   }
 
-  deleteCard = (e) => {
-    this.setState({
-      jobArray: this.state.jobArray.filter(card => card.id !== e.target.parentElement.id)
-    });
-  }
-
-  handleView = () => {
-    if (this.state.btnText === 'Submit') {
+  const handleView = () => {
+    if (btnText === 'Submit') {
       return(
         <form className="edu-form">
           <label>Company</label>
-          <input name="company" onChange={this.changeText}></input>
+          <input name="company" onChange={changeText}></input>
           <label>Title</label>
-          <input name="title" onChange={this.changeText}></input>
+          <input name="title" onChange={changeText}></input>
           <label>Tasks</label>
-          <input name="tasks" onChange={this.changeText}></input>
+          <input name="tasks" onChange={changeText}></input>
           <label>Started</label>
-          <input name="started" onChange={this.changeText}></input>
+          <input name="started" onChange={changeText}></input>
           <label>Finished</label>
-          <input name="finished" onChange={this.changeText}></input>
+          <input name="finished" onChange={changeText}></input>
         </form>
       );
     }
     return(
-      <JobCards deleteCard={this.deleteCard} cards={this.state.jobArray}/>
+      <JobCards deleteCard={deleteCard} cards={jobArray}/>
     );
   }
 
-  changeText = (e) => {
-    this.setState({
+  const changeText = (e) => {
+    setFields({
       [e.target.name]: e.target.value
     })
   }
 
-  addJob = () => {
-    if (this.state.btnText === 'Submit') {
+  const addJob = () => {
+    if (btnText === 'Submit') {
       const card = {
         id: uniqid(),
-        company: this.state.company,
-        title: this.state.title,
-        tasks: this.state.tasks,
-        started: this.state.started,
-        finished: this.state.finished
+        company: fields.company,
+        title: fields.title,
+        tasks: fields.tasks,
+        started: fields.started,
+        finished: fields.finished
       };
 
-      this.setState({
-        btnText: 'Add',
+      setBtnText('Add');
+      setFields({        
         company: '',
         title: '',
         tasks: '',
         started: '',
-        finished: '',
-        jobArray: this.state.jobArray.concat(card)
+        finished: ''
       });
+      setJobArray(jobArray.concat(card));
     } else {
-      this.setState({
-        btnText: 'Submit'
-      });
+      setBtnText('Submit');
     }
   }
 
-  render() {
-    return(
-      <div className="job-container">
-        <button onClick={this.addJob}>{this.state.btnText}</button>
-        {this.handleView()}
-      </div>
-    );
-  };
+  return(
+    <div className="job-container">
+      <button onClick={addJob}>{btnText}</button>
+      {handleView()}
+    </div>
+  );
 }
 
 export default Jobs;

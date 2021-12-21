@@ -4,16 +4,8 @@ import Education from './components/Education';
 import Jobs from './components/Jobs';
 import './style.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
 
-    // this.state = {
-    //   editMode: true
-    // };
-  }
-
-  render() {
     return (
       <div className="App">
         <h1>CV App</h1>
@@ -25,7 +17,6 @@ class App extends Component {
         <Jobs />
       </div>
     );
-  }
 }
 
 export default App;

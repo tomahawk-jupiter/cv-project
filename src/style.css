@@ -1,9 +1,16 @@
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
 
 .contact-container {
   display: flex;
   flex-direction: column;
   width: 300px;
   border: solid 1px;
+  padding: 5px;
 }
 
 form {
@@ -11,24 +18,31 @@ form {
   flex-direction: column;
   width: 300px;
   border: solid 1px;
+  padding: 5px;
 }
 
 .edu-container {
   width: 300px;
   border: solid 1px;
+  padding: 5px;
 }
 
 .job-container {
   width: 300px;
   border: solid 1px;
+  padding: 5px;
 }
 
 .card {
   border: solid 1px;
   margin: 5px;
+  padding: 5px;
 }
 
 button {
   margin: 5px;
 }
 
+input {
+  margin-bottom: 5px;
+}
