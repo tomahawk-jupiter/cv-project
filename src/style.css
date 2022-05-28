@@ -2,47 +2,67 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;
+  font-family: Arial, sans-serif;
 }
 
 .contact-container {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  border: solid 1px;
+  min-width: 300px;
   padding: 5px;
+  box-shadow: 1px 1px 8px 1px gray;
 }
 
 form {
   display: flex;
   flex-direction: column;
   width: 300px;
-  border: solid 1px;
   padding: 5px;
+  box-shadow: 1px 1px 8px 1px gray;
 }
 
 .edu-container {
-  width: 300px;
-  border: solid 1px;
+  min-width: 324px;
   padding: 5px;
 }
 
 .job-container {
-  width: 300px;
-  border: solid 1px;
+  min-width: 324px;
   padding: 5px;
 }
 
 .card {
-  border: solid 1px;
   margin: 5px;
   padding: 5px;
+  max-width: 300px;
+  box-shadow: 1px 1px 8px 1px gray;
+}
+.card button {
+  background-color: #9b1818;
 }
 
 button {
   margin: 5px;
+  border: none;
+  padding: 0.5rem;
+  color: white;
+  background-color: cadetblue;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+button:hover {
+  opacity: 0.9;
+}
+
+label {
+  margin-bottom: 0.25rem;
+  color: #292929;
 }
 
 input {
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
 }
